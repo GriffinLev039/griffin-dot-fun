@@ -1,0 +1,70 @@
+const BLOCK_COUNT = 100;
+const TICKS_PER_SECOND = 60; 
+const container = document.getElementById('container');
+
+const renderEngine = new RenderEngine(container, {blockCount: BLOCK_COUNT, tps: TICKS_PER_SECOND}); //Establish div container
+                                                        //By default use 1:1 px to 'point' scale
+                                                        //Block count provides a scale used to quantify how many blocks are present.
+                                                        //Also allow for defining pixel per block count? Width and height? 
+                                                        //Also allow for mismatch in block count width and block count height?
+                                                        //I can likely add some aspect ratio supply stuff in the future. Research screen display stuff in relation to this
+                                                        // TICKS PER SECOND DEFAULTS TO 60.
+                                                        
+const colorSource = 'rgba(0,255,0,1)';
+const StaticBlock = new StaticBlock(colorSource, {xPos: 0, yPos: 0, xSpan: 10, ySpan: 10});
+
+
+const TICKS_PER_TRIGGER = 5; 
+function renderPointFunction(BlockInfo) {
+    // Idea is you take a function that takes an object called BlockInfo
+    //Block info supplies:
+    // timestamp
+    // info about current block (x and y pos, current color)
+    // info about adjacent blocks within a certain radius
+    // info about a point within a block within a given radius
+    //
+}
+
+const PX_SCALE = 5; //Means 5x5 grid for every px.
+const TICKS_PER_RENDER = 10; //Means it will render every 10 ticks
+const dynamicBlock = new DynamicBlock(renderPointFunction, {pxScale: PX_SCALE, tpr: TICKS_PER_RENDER})
+
+renderEngine.newBlock(dynamicBlock, {xPos: 0, yPos: 0, xSpan: 10, ySpan: 10, zIndex: -5}) //Sorted by number with lower numbers rendered first, meaning higher number will render above lower number. Defaults to position in list created (If this was the 5th block, it'd have an id of 4.) Clashes result in the default being assigned instead. Could also use the clash solving mechanism to just *2 the number until it fits? Or +1 till it fits? Look into algorithms resolving clashes in arrays. 
+
+renderEngine.newBlock(dynamicBlock {xPos: 14, yPos: 14, xSpan: 40, ySpan: 40}) //Same block object can be reused to create more. 
+
+//The most critical parts of a website are text and buttons, and as such I need a way to handle these. I think I'll do a RenderText object and set up a structure to 'lasso' the text to a parent object (think Adobe After Effects) so it either: a.) Stays within that object or b.) Mirrors that objects transforms and movements. In fact, I'll set up that 'lasso' principle for everything!
+
+
+
+renderEngine.start();
+
+
+
+
+
+//PSUEDOCODE
+
+LET DISPTEXT = NEW TEXT 'TEMP' 
+DISPTEXT.containedBy(givenblock)
+
+LET OTHERTEXT = NEW TEXT 'AAUGH'
+OTHERTEXT.mirrors(parentBlock)
+
+This then implies I am doing more than a rendering engine though. Uhhh
+Render engine + accessibility + moveable display blocks?
+
+
+LET DYNAMICBLOCK = NEW DYNAMICBLOCK
+
+LET TRAVELPATH = NEW PATH
+
+DYNAMICBLOCK.FOLLOW(TRAVELPATH, 8s)
+
+DYNAMICBLOCK.mOVEMENTCURVE(new BezierCurve...) //Map movement of object to curve to create ease in-out
+
+DYNAMICBLOCK.scale(0.5)
+
+DYNAMICBLOCK.reset() //Return to original X, Y, scale. 
+
+Look into WebGPU!!!

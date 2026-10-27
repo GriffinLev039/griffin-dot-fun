@@ -24,7 +24,7 @@ function setupCanvas() {
     canvas.style.height = `${height}px`;
 
     ctx.scale(dpr, dpr);
-    ctx.fillStyle = "gray";
+    ctx.fillStyle = "#45455c";
     ctx.font = `${dotSize * 8}px monospace`;
 
 }
@@ -81,9 +81,9 @@ document.addEventListener('mousemove', (e) => {
         for (let y = startY; y < endY; y += spacing) {
             let prox = proxToCenter(x, y, mouseRadius, mouseX, mouseY);
             if (prox > 0) {
-                ctx.fillStyle = "white";
+                ctx.fillStyle = "#57576cx";
                 ctx.fillText(`${chars[(x / 15 + y / 6) % chars.length]}`, x, y, dotSize * 10 * prox);
-                ctx.fillStyle = "gray";
+                ctx.fillStyle = "#45455c";
             } else {
                 ctx.fillRect(x, y, dotSize, dotSize);
             }

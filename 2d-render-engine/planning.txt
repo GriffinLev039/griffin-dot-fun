@@ -1,0 +1,31 @@
+
+Project Roadmap (AI Generated - no AI code has been used, AI has been solely used as a research and review resource)
+Phase 1: The Core (Where you are now)
+
+    Finish Current Implementation: Get your fillRect math, matrix indexing, and basic game loop working perfectly.
+
+    Implement Benchmarking (Crucial Intermediary Step): Before you change anything about how you render, build a performance monitor. Track FPS (Frames Per Second) and frame-time (how many milliseconds it takes to execute one loop). You cannot optimize what you cannot measure. You need to know your baseline fillRect performance so you can prove your later optimizations actually worked.
+
+Phase 2: The Web Reality (Intermediary Phase)
+
+Since you plan to use this for web backgrounds, you need to handle the DOM's quirks before making your engine more complex.
+3.  Handle Resize Events: If the user resizes their browser window, your canvas will stretch and distort, or leave empty space. You need a system to recalculate pxPerBlockX, resize the canvas element, and potentially rebuild the pointMatrix dynamically without crashing.
+4.  Device Pixel Ratio (DPI) Scaling: This is a massive gotcha in web graphics. If you draw a 1920x1080 canvas on a MacBook or a modern smartphone, it will look blurry. You must implement window.devicePixelRatio scaling (scaling the canvas's internal coordinate system up, while using CSS to scale its visual size down) to ensure your engine looks crisp on retina displays.
+5.  Coordinate Mapping (Event Handling): Build a utility that perfectly translates a DOM mouse event (clientX, clientY) into your engine's internal matrix coordinates (xPos, yPos), accounting for DPI scaling and canvas offsets.
+Phase 3: Architectural Shifts
+
+    Implement Canvas Layering (Your Step 2): Separate your static rendering and dynamic rendering onto stacked canvases. Watch your FPS counter jump.
+
+    Sector / Chunk Management: Formalize your "trigger-based sectors" logic. Build a system that tracks "dirty rectangles" so your dynamic canvas only clears and redraws the specific bounding boxes where movement occurred, rather than ctx.clearRect(0, 0, width, height) every frame.
+
+Phase 4: Low-Level Optimization
+
+    Switch to the Pixel Buffer API (Your Step 3): Ditch fillRect. Shift to CanvasRenderingContext2D.getImageData() and write directly to the Uint8ClampedArray. You will learn how colors are stored in memory (RGBA bytes) and how 2D coordinates map to a 1D array index: index = (y * width + x) * 4.
+
+Phase 5: The Final Frontier (Further Steps)
+
+    OffscreenCanvas & Web Workers: If you want to use this for complex website backgrounds without causing the main UI to lag, move your entire rendering engine into a Web Worker using the OffscreenCanvas API. This runs your math and pixel manipulation on a completely separate CPU thread.
+
+    The Demo: Build a show-stopping demo. An engine is only as good as what it produces.
+
+What kind of demo or specific interactive background do you envision building to serve as the ultimate stress test for your engine once it's complete?

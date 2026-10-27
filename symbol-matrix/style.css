@@ -1,10 +1,76 @@
-* { 
+* {
     margin: 0;
 }
 
+
+
 #target {
+    top: 0;
+    left: 0;
     width: 100vw;
     height: 100vh;
-    background-color: black;
+    background-color: #06080F;
     color: white;
+    position: fixed;
+    z-index: -1;
+}
+
+header {
+    width: 100vw;
+    height: 6vh;
+    background-color: #201F23;
+}
+
+main {
+    width: 100vw;
+    height: 94vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#dashboard {
+    width: 1000px;
+    height: 600px;
+    background-color: #201F23;
+    border-radius: 40px;
+    display: grid;
+    grid-template-areas:
+        "a a a a b b b b c c"
+        "d d e e e e f f c c"
+        "d d e e e e f f c c"
+    ;
+    gap: 15px;
+    padding: 30px;
+    
+}
+
+#dashboard>* {
+    background-color: #57576c;
+    border-radius: 30px;
+}
+
+#weather {
+    grid-area: a;
+
+}
+
+#profile {
+    grid-area: b;
+}
+
+#clock {
+    grid-area: d;
+}
+
+#calendar {
+    grid-area: e;
+}
+
+#resources {
+    grid-area: f;
+}
+
+#media {
+    grid-area: c;
 }
